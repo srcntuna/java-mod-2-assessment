@@ -4,12 +4,23 @@ public class HospitalWorld {
     public static void main(String[] args) {
         // your code here
 
-        System.out.println("Please create your own hospital!");
-        System.out.println("Please give a name to your hospital!");
+        System.out.println("WELCOME!!!!");
 
         try (Scanner scanner = new Scanner(System.in)) {
 
-            String hospitalName = scanner.nextLine();
+            String hospitalName;
+            while (true) {
+                System.out.println("Please give a name to your hospital!");
+
+                hospitalName = scanner.nextLine();
+
+                if (hospitalName.length() != 0) {
+                    break;
+                }
+
+                System.out.println("Please enter a name!");
+            }
+
             var hospital = new Hospital(hospitalName);
 
             System.out.println("You will create doctors now for your hospital...");
@@ -40,7 +51,7 @@ public class HospitalWorld {
             System.out.println("Please type a name for your " + person + ":");
             String name = scanner.nextLine();
 
-            if (name.length() == 0) {
+            if (name.length() == 0 || isParsable(name)) {
                 i = i - 1;
                 System.out.println("You have to enter a name!");
                 continue;
@@ -77,6 +88,15 @@ public class HospitalWorld {
         System.out.println("|  3.    Cardiology           |");
         System.out.println(" ----------------------------- ");
 
+    }
+
+    static boolean isParsable(String input) {
+        try {
+            Integer.parseInt(input);
+            return true;
+        } catch (final NumberFormatException e) {
+            return false;
+        }
     }
 
 }

@@ -9,6 +9,7 @@ public class Hospital {
   public int currPatientId;
 
   Hospital(String name) {
+
     this.name = name;
     this.currPatientId = 1;
     this.divisions = new ArrayList<Division>();
@@ -33,8 +34,6 @@ public class Hospital {
       }
     }
 
-    System.out.println("Sorry but that kind of department does not exist in this hospital!");
-
   }
 
   public void addPatient(String patientName, String specialityNeeded) {
@@ -43,6 +42,11 @@ public class Hospital {
 
       if (division.name.equals(specialityNeeded)) {
         var newPatient = new Patient(patientName, specialityNeeded, this.currPatientId);
+
+        if (division.doctors.isEmpty()) {
+          System.out.println("Sorry but there is no assigned doctor for " + division.name);
+          return;
+        }
 
         Random rand = new Random();
         Doctor randomDoctor = division.doctors.get(rand.nextInt(division.doctors.size()));
@@ -56,8 +60,6 @@ public class Hospital {
       }
 
     }
-
-    System.out.println("Sorry but that kind of department does not exist in this hospital!");
 
   }
 
